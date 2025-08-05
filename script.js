@@ -1,5 +1,5 @@
 
-const sheetUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSCxc3ylytZ92OuaYLqDZ4g1U5WCo3M9xrYywh4OpsIKu8HrhSMNNzPbOwPFmKPdtDlqHw9ZlJN1W0F/pub?gid=0&single=true&output=csv";
+const sheetUrl = "Dati.csv";
 
 const map = document.getElementById("map");
 const filterOptions = document.getElementById("filterOptions");
