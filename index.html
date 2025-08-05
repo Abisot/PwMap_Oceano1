@@ -1,0 +1,68 @@
+
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>Mappa Interattiva con Icone e Minimap</title>
+  <style>
+    body { margin: 0; font-family: sans-serif; }
+    .cell {
+      width: 10px; height: 10px; border: 0.5px solid #eee;
+      box-sizing: border-box; position: relative;
+    }
+    .cell img {
+      width: 100%; height: 100%; object-fit: contain; pointer-events: none;
+    }
+    .cell:hover::after {
+      content: attr(data-info); position: absolute; top: -25px; left: 0;
+      background: rgba(0, 0, 0, 0.75); color: white; padding: 2px 5px;
+      font-size: 10px; white-space: nowrap; z-index: 100; pointer-events: none;
+    }
+    #map {
+      display: grid; grid-template-columns: repeat(150, 10px);
+      grid-template-rows: repeat(150, 10px); width: max-content; height: max-content;
+    }
+    #mapContainer { flex: 1; overflow: auto; position: relative; }
+    #filterPanel {
+      width: 200px; padding: 10px; background: #f9f9f9;
+      overflow-y: auto; border-right: 1px solid #ccc;
+    }
+    #toolbar {
+      padding: 10px; background: #f0f0f0; border-bottom: 1px solid #ccc;
+    }
+    input[type="text"] { width: 150px; padding: 4px; }
+    button { padding: 4px 8px; margin-left: 5px; }
+    #minimap {
+      width: 150px; height: 150px; position: fixed;
+      bottom: 10px; right: 10px; border: 1px solid #999;
+      background: #fff; z-index: 1000;
+    }
+    #minimapCanvas {
+      width: 100%; height: 100%; display: block; cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <script src="auth.js"></script>
+  <div style="display: flex; height: 100vh;">
+    <div id="filterPanel">
+      <h4>Filtra tipologia</h4>
+      <div>
+        <label><input type="checkbox" id="selectAll" checked> Tutti</label><br>
+        <label><input type="checkbox" id="selectNone"> Nessuno</label>
+      </div>
+      <div id="filterOptions"></div>
+    </div>
+    <div style="flex: 1; display: flex; flex-direction: column;">
+      <div id="toolbar">
+        <input type="text" id="searchBox" placeholder="Cerca (es. 70,14 o Pirata)" />
+        <button onclick="searchMap()">Cerca</button>
+      </div>
+      <div id="mapContainer"><div id="map"></div></div>
+    </div>
+  </div>
+  <div id="minimap"><canvas id="minimapCanvas" width="150" height="150"></canvas></div>
+  <script src="https://unpkg.com/@panzoom/panzoom@9.4.0/dist/panzoom.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
